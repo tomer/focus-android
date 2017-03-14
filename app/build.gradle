@@ -96,6 +96,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile "org.robolectric:robolectric:3.1.4"
     androidTestCompile "tools.fastlane:screengrab:1.0.2"
+    androidTestCompile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 }
 
