@@ -118,11 +118,25 @@ public class WebViewProvider {
         }
 
         private TrackingProtectionWebViewClient createWebViewClient() {
+
             return new TrackingProtectionWebViewClient(getContext().getApplicationContext()) {
+                boolean errorReceived;
+
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                    if (callback != null) {
-                        callback.onPageStarted(url);
+                    if (errorReceived) {
+                        // When dealing with error pages, webkit sometimes sends onPageStarted()
+                        // without a matching onPageFinished(). We hack around that by using
+                        // a flag to ignore the first onPageStarted() after onReceivedError() has
+                        // been called. (The usual chain is: onPageStarted(url), onReceivedError(url),
+                        // onPageFinished(url), onPageStarted(url), finally and only sometimes: onPageFinished().
+                        // Since the final onPageFinished isn't guaranteed (and we know we're showing an error
+                        // page already), we don't need to send the onPageStarted() callback a second time anyway.
+                        errorReceived = false;
+
+                        if (callback != null) {
+                            callback.onPageStarted(url);
+                        }
                     }
                     super.onPageStarted(view, url, favicon);
                 }
@@ -133,6 +147,14 @@ public class WebViewProvider {
                         callback.onPageFinished(view.getCertificate() != null);
                     }
                     super.onPageFinished(view, url);
+                }
+
+                @Override
+                public void onReceivedError(WebView webView, int errorCode, String description,
+                                            String failingUrl) {
+                    errorReceived = true;
+
+                    super.onReceivedError(webView, errorCode, description, failingUrl);
                 }
 
                 @Override
