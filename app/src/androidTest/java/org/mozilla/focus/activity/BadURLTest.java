@@ -88,7 +88,6 @@ public class BadURLTest {
         ViewInteraction floatingEraseButton = onView(
                 allOf(withId(R.id.erase), isDisplayed()));
         UiObject notFoundMsg = mDevice.findObject(new UiSelector()
-        .resourceId("et_dnsNotFound")
         .description("The address wasn’t understood")
         .enabled(true));
         UiObject notFounddetailedMsg = mDevice.findObject(new UiSelector()
