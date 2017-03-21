@@ -60,7 +60,7 @@ public class BadURLTest {
     @Test
     public void BadURLcheckTest() throws InterruptedException, UiObjectNotFoundException {
         UiDevice mDevice;
-        final long waitingTime = DateUtils.SECOND_IN_MILLIS * 2;
+        final long waitingTime = DateUtils.SECOND_IN_MILLIS * 4;
 
         // Initialize UiDevice instance
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -107,7 +107,7 @@ public class BadURLTest {
         mDevice.wait(Until.hasObject(hint), waitingTime);
         mDevice.pressKeyCode(KEYCODE_ENTER);
         tryAgainBtn.waitForExists(waitingTime);
-
+        notFoundMsg.waitForExists(waitingTime);
         /* Check for error message */
         assertTrue(notFoundMsg.exists());
         assertTrue(notFounddetailedMsg.exists());
@@ -123,11 +123,11 @@ public class BadURLTest {
                 "utm_source%3Dmozilla%26utm_medium%3DReferral%26utm_campaign%3Dmozilla-org");
         mDevice.wait(Until.hasObject(hint), waitingTime);
         mDevice.pressKeyCode(KEYCODE_ENTER);
-        tryAgainBtn.waitForExists(waitingTime);
+        UiObject cancelBtn = mDevice.findObject(new UiSelector()
+                .resourceId("android:id/button2"));
+        cancelBtn.waitForExists(waitingTime);
+        assertTrue(cancelBtn.exists());
+        cancelBtn.click();
 
-        /* Check for error message */
-        assertTrue(notFoundMsg.exists());
-        assertTrue(notFounddetailedMsg.exists());
-        assertTrue(tryAgainBtn.exists());
     }
 }
