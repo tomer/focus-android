@@ -83,7 +83,7 @@ public class BadURLTest {
                 .focused(true)
                 .enabled(true));
         UiObject tryAgainBtn = mDevice.findObject(new UiSelector()
-                .resourceId("errorTryAgain")
+                .description("Try Again")
                 .clickable(true));
         ViewInteraction floatingEraseButton = onView(
                 allOf(withId(R.id.erase), isDisplayed()));
