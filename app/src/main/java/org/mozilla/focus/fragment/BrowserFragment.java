@@ -258,18 +258,24 @@ public class BrowserFragment extends Fragment implements View.OnClickListener {
     }
 
     public String getUrl() {
-        return webView.getUrl();
+        if (webView != null) {
+            return webView.getUrl();
+        } else {
+            return null;
+        }
     }
 
     public boolean canGoForward() {
-        return webView.canGoForward();
+        return webView != null ? webView.canGoForward() : false;
     }
 
     public boolean canGoBack() {
-        return webView.canGoBack();
+        return webView != null ? webView.canGoBack() : false;
     }
 
     public void goBack() {
-        webView.goBack();
+        if (webView != null) {
+            webView.goBack();
+        }
     }
 }
