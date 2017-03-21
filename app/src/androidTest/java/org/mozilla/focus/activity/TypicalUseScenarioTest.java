@@ -170,19 +170,19 @@ public class TypicalUseScenarioTest {
                 .className("android.widget.LinearLayout")
                 .instance(2));
         UiObject blockAdTrackerValue = blockAdTrackerEntry.getChild(new UiSelector()
-                .resourceId("android:id/switch_widget"));
+                .className("android.widget.Switch"));
 
         UiObject blockAnalyticTrackerEntry = settingsList.getChild(new UiSelector()
                 .className("android.widget.LinearLayout")
                 .instance(4));
         UiObject blockAnalyticTrackerValue = blockAnalyticTrackerEntry.getChild(new UiSelector()
-                .resourceId("android:id/switch_widget"));
+                .className("android.widget.Switch"));
 
         UiObject blockSocialTrackerEntry = settingsList.getChild(new UiSelector()
                 .className("android.widget.LinearLayout")
                 .instance(6));
         UiObject blockSocialTrackerValue = blockSocialTrackerEntry.getChild(new UiSelector()
-                .resourceId("android:id/switch_widget"));
+                .className("android.widget.Switch"));
 
         blockAdTrackerEntry.click();
         blockAnalyticTrackerEntry.click();
